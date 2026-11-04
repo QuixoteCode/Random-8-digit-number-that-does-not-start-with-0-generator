@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random 8-Digit Number Generator</title>
+</head>
+<body>
+
+    <h2>Random 8-Digit Number Generator</h2>
+
+    <button onclick="generateNumber()">Generate number</button>
+
+    <h1 id="result">-</h1>
+
+    <script>
+        function generateNumber() {
+            // The first digit is never zero
+            let firstDigit = Math.floor(Math.random() * 9) + 1;
+
+            // Remaining 7 digits (can be zero)
+            let remainingDigits = Math.floor(
+                Math.random() * 10000000
+            ).toString().padStart(7, '0');
+
+            let randomNumber = firstDigit + remainingDigits;
+
+            document.getElementById("result").textContent = randomNumber;
+        }
+    </script>
+
+</body>
+</html>
