@@ -13,19 +13,37 @@
 
     <h1 id="result">-</h1>
 
+    <p>Numbers generated: <span id="count">0</span></p>
+
     <script>
+        // Stores all previously generated numbers
+        const generatedNumbers = new Set();
+
         function generateNumber() {
-            // The first digit is never zero
-            let firstDigit = Math.floor(Math.random() * 9) + 1;
+            let randomNumber;
 
-            // Remaining 7 digits (can be zero)
-            let remainingDigits = Math.floor(
-                Math.random() * 10000000
-            ).toString().padStart(7, '0');
+            do {
+                // The first digit is never zero
+                let firstDigit = Math.floor(Math.random() * 9) + 1;
 
-            let randomNumber = firstDigit + remainingDigits;
+                // Remaining 7 digits (can be zero)
+                let remainingDigits = Math.floor(
+                    Math.random() * 10000000
+                ).toString().padStart(7, '0');
 
+                randomNumber = firstDigit + remainingDigits;
+
+                // Repeat if the number has already been generated
+            } while (generatedNumbers.has(randomNumber));
+
+            // Save the new, unique number
+            generatedNumbers.add(randomNumber);
+
+            // Display the result
             document.getElementById("result").textContent = randomNumber;
+
+            // Update the total number of generated numbers
+            document.getElementById("count").textContent = generatedNumbers.size;
         }
     </script>
 
